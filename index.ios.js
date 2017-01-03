@@ -1,17 +1,16 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
+'use strict';
+
 
 import React, { Component } from 'react';
 import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  NavigatorIOS
 } from 'react-native';
 
+var SearchPage = require('./SearchPage');
 const Realm = require('realm');
 
 
@@ -53,59 +52,40 @@ carRealm.write(() => {
   console.log('>>>>> Car miles is: ' + car.miles);
 });
 
-class NewDataTry extends Component {
+class HelloWorld extends Component {
   render() {
-    // let realm = new Realm({
-    //  schema: [{name: 'Dog', properties: {name: 'string'}}]
-    // });
-    //
-    // realm.write(() => {
-    //   realm.create('Dog', {name: 'Rex'});
-    // });
-    //
-    // console.log(realm.objects('Dog'));
-
     return (
-      <View style={{flex:1}}>
-        <View style={styles.container}>
-          <Text style={styles.welcome}>
-            Welcome to React Native!
-          </Text>
-          <Text style={styles.instructions}>
-            To get started, edit index.ios.js
-          </Text>
-          <Text style={styles.instructions}>
-            Press Cmd+R to reload,{'\n'}
-            Cmd+D or shake for dev menu
-          </Text>
-        </View>
-        <View style={styles.container}>
-          <Text style={styles.welcome}>
-            Count of Dogs in Realm: {/*realm.objects('Dog').length*/}
-          </Text>
-        </View>
-      </View>
+      <Text style={styles.text}>
+        Hello World (Again)
+      </Text>
     );
   }
 }
 
-const styles = StyleSheet.create({
+class PropertyFinderApp extends Component {
+  render() {
+    return (
+      <NavigatorIOS
+        style={styles.container}
+        initialRoute={{
+          title: 'Property Finder',
+          component: SearchPage,
+        }}/>
+    );
+  }
+}
+
+var styles = StyleSheet.create({
+  text: {
+    color: 'black',
+    backgroundColor: 'white',
+    fontSize: 30,
+    margin: 80
+  },
+
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+    flex: 1
+  }
 });
 
-AppRegistry.registerComponent('NewDataTry', () => NewDataTry);
+AppRegistry.registerComponent('NewDataTry', () => PropertyFinderApp);
