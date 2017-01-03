@@ -7,7 +7,9 @@ import {
   StyleSheet,
   Text,
   View,
-  NavigatorIOS
+  NavigatorIOS,
+  TouchableHighlight,
+  ActivityIndicator
 } from 'react-native';
 
 var SearchPage = require('./SearchPage');

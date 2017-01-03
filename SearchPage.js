@@ -32,12 +32,14 @@ class SearchPage extends Component {
               </Text>
           </TouchableHighlight>
         </View>
-        <TouchableHighlight style={styles.button}
-          underlayColor="#99d9f4">
-          <Text style={styles.buttonText}>
-            Location
-          </Text>
-        </TouchableHighlight>
+        <View style={styles.flowRight}>
+          <TouchableHighlight style={styles.button}
+            underlayColor='#99d9f4'>
+            <Text style={styles.buttonText}>
+              Location
+            </Text>
+          </TouchableHighlight>
+        </View>
       </View>
     );
   }
@@ -66,7 +68,7 @@ var styles = StyleSheet.create({
     alignSelf: 'center'
   },
   button: {
-    height: 36, 
+    height: 36,
     flex: 1,
     flexDirection: 'row',
     backgroundColor: '#48BBEC',
