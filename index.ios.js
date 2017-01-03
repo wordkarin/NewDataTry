@@ -52,16 +52,6 @@ carRealm.write(() => {
   console.log('>>>>> Car miles is: ' + car.miles);
 });
 
-class HelloWorld extends Component {
-  render() {
-    return (
-      <Text style={styles.text}>
-        Hello World (Again)
-      </Text>
-    );
-  }
-}
-
 class PropertyFinderApp extends Component {
   render() {
     return (
