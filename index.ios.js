@@ -24,6 +24,8 @@ class NewDataTry extends Component {
       realm.create('Dog', {name: 'Rex'});
     });
 
+    console.log(realm.objects('Dog')); 
+
     return (
       <View style={{flex:1}}>
         <View style={styles.container}>
