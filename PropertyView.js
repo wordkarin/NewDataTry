@@ -1,6 +1,6 @@
 'use strict';
 
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import {
   StyleSheet,
   Image,
@@ -9,19 +9,24 @@ import {
 } from 'react-native';
 
 class PropertyView extends Component {
-  render (){
-    var property = this.props.property;
-    var stats = property.bedroom_number + ' bed ' + property.property_type;
-    if (property.bathroom_number) {
-      stats += ', ' + property.bathroom_number + ' ' + (property.bathroom_number > 1 ? 'bathrooms' : 'bathroom');
+  render() {
+    const property = this.props.property;
+    let stats = `${property.bedroom_number} bed ${property.property_type}`;
+    const price = property.price_formatted.split(' ')[0];
+
+    if (property.bathroom_number > 1) {
+      stats += `, ${property.bathroom_number} bathrooms`;
+    } else if (property.bathroom_number === 1) {
+      stats += `, ${property.bathroom_number} bathroom `;
     }
 
-    var price = property.price_formatted.split(' ')[0];
 
     return (
       <View style={styles.container}>
-        <Image style={styles.image}
-          source = {{uri: property.img_url}} />
+        <Image
+          style={styles.image}
+          source={{ uri: property.img_url }}
+        />
         <View style={styles.heading}>
           <Text style={styles.price}>
             {price}
@@ -42,7 +47,7 @@ class PropertyView extends Component {
   }
 }
 
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     marginTop: 65
   },
@@ -51,7 +56,7 @@ var styles = StyleSheet.create({
   },
   separator: {
     height: 1,
-    backgroundColor: "#dddddd"
+    backgroundColor: '#dddddd'
   },
   image: {
     width: 400,

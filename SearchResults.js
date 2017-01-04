@@ -1,6 +1,6 @@
 'use strict';
 
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import {
   StyleSheet,
   Image,
@@ -10,32 +10,48 @@ import {
   Text
 } from 'react-native';
 
-var PropertyView = require('./PropertyView');
+const PropertyView = require('./PropertyView');
 
 class SearchResults extends Component {
   constructor(props) {
     super(props);
-    var dataSource = new ListView.DataSource(
-      {rowHasChanged: (r1, r2) => r1.lister_url !== r2.lister_url});
+    const dataSource = new ListView.DataSource(
+      { rowHasChanged: (r1, r2) => r1.lister_url !== r2.lister_url });
     this.state = {
       dataSource: dataSource.cloneWithRows(this.props.listings)
     };
   }
 
+  rowPressed(listerURL) {
+    const property = this.props.listings.filter(prop => prop.lister_url === listerURL)[0];
+
+    this.props.navigator.push({
+      title: 'Property',
+      component: PropertyView,
+      passProps: { property }
+    });
+  }
   renderRow(rowData, sectionID, rowID) {
-    var price = rowData.price_formatted.split(' ')[0];
+    const price = rowData.price_formatted.split(' ')[0];
     return (
-      <TouchableHighlight onPress={() => this.rowPressed(rowData.lister_url)}
-        underlayColor="#dddddd">
+      <TouchableHighlight
+        onPress={() => this.rowPressed(rowData.lister_url)}
+        underlayColor="#dddddd"
+      >
         <View>
           <View style={styles.rowContainer}>
-            <Image style={styles.thumb} source={{uri: rowData.img_url}} />
+            <Image
+              style={styles.thumb}
+              source={{ uri: rowData.img_url }}
+            />
             <View style={styles.textContainer}>
               <Text style={styles.price}>
                 {price}
               </Text>
-              <Text style={styles.title}
-                numberOfLines={1}>
+              <Text
+                style={styles.title}
+                numberOfLines={1}
+              >
                 {rowData.title}
               </Text>
             </View>
@@ -45,26 +61,17 @@ class SearchResults extends Component {
     );
   }
 
-  rowPressed(listerURL){
-    var property = this.props.listings.filter(prop => prop.lister_url === listerURL)[0];
-
-    this.props.navigator.push({
-      title: "Property",
-      component: PropertyView,
-      passProps: {property: property}
-    }); 
-  }
-
-  render(){
+  render() {
     return (
       <ListView
         dataSource={this.state.dataSource}
-        renderRow={this.renderRow.bind(this)} />
+        renderRow={this.renderRow.bind(this)}
+      />
     );
   }
 }
 
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
   thumb: {
     width: 80,
     height: 80,
