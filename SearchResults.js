@@ -10,6 +10,8 @@ import {
   Text
 } from 'react-native';
 
+var PropertyView = require('./PropertyView');
+
 class SearchResults extends Component {
   constructor(props) {
     super(props);
@@ -45,6 +47,12 @@ class SearchResults extends Component {
 
   rowPressed(listerURL){
     var property = this.props.listings.filter(prop => prop.lister_url === listerURL)[0];
+
+    this.props.navigator.push({
+      title: "Property",
+      component: PropertyView,
+      passProps: {property: property}
+    }); 
   }
 
   render(){
